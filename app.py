@@ -70,3 +70,12 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+# Eliminar un movimiento
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete_movimiento(id):
+    conn = sqlite3.connect('finanzas.db')
+    c = conn.cursor()
+    c.execute('DELETE FROM movimientos WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect('/')
