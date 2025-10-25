@@ -99,21 +99,30 @@
   <h2>📜 Movimientos</h2>
   <table>
     <tr>
-      <th>ID</th>
-      <th>Concepto</th>
-      <th>Monto (€)</th>
-      <th>Persona</th>
-      <th>Fecha</th>
-    </tr>
-    {% for mov in movimientos %}
-    <tr>
-      <td>{{ mov[0] }}</td>
-      <td>{{ mov[1] }}</td>
-      <td class="{{ 'positivo' if mov[2] >= 0 else 'negativo' }}">{{ mov[2] }}</td>
-      <td>{{ mov[3] }}</td>
-      <td>{{ mov[4] }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+    <th>ID</th>
+    <th>Concepto</th>
+    <th>Monto (€)</th>
+    <th>Persona</th>
+    <th>Fecha</th>
+    <th>Eliminar</th> <!-- nueva columna -->
+  </tr>
+  {% for mov in movimientos %}
+  <tr>
+    <td>{{ mov[0] }}</td>
+    <td>{{ mov[1] }}</td>
+    <td class="{{ 'positivo' if mov[2] >= 0 else 'negativo' }}">{{ mov[2] }}</td>
+    <td>{{ mov[3] }}</td>
+    <td>{{ mov[4] }}</td>
+    <td>
+      <form action="/delete/{{ mov[0] }}" method="post" style="margin:0;">
+        <button type="submit" style="background:red;color:white;border:none;padding:5px 8px;border-radius:4px;cursor:pointer;">
+          X
+        </button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
 </body>
 </html>
